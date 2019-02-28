@@ -30,7 +30,7 @@ export default Component.extend({
   /**
    * @property {Array} classNames
    */
-  classNames: ['grid-stack-item'],
+  classNames: [ 'grid-stack-item' ],
 
   /**
    * @property {Ember.Component} parentContainer - reference to the grid-stack component this component belongs to
@@ -46,7 +46,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    let options = get(this, 'options');
+    const options = get(this, 'options');
 
     if (options) {
       // Since attributeBindings cannot be a computed property,
@@ -55,7 +55,7 @@ export default Component.extend({
 
         // Convert each given option into a html data attribute
         Object.keys(options).map(key => {
-          let dataKey = GS_PREFIX + dasherize(key);
+          const dataKey = GS_PREFIX + dasherize(key);
 
           return `options.${key}:${dataKey}`;
         })
@@ -70,7 +70,7 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    let gridStack = get(this, 'parentContainer');
+    const gridStack = get(this, 'parentContainer');
 
     if (gridStack) {
       // Register widget with grid
@@ -85,7 +85,7 @@ export default Component.extend({
   willDestroyElement() {
     this._super(...arguments);
 
-    let gridStack = this.get('parentContainer');
+    const gridStack = this.get('parentContainer');
 
     if (gridStack) {
       // Make sure grid stack is updated

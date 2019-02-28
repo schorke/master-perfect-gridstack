@@ -38,7 +38,7 @@ export default Component.extend({
   /**
    * @property {Array} classNames
    */
-  classNames: ['grid-stack'],
+  classNames: [ 'grid-stack' ],
 
   /**
    * @property {Boolean} gridStackContainer - used by child components to find this component
@@ -50,7 +50,7 @@ export default Component.extend({
    * @property {Object} gridStack - reference to gridstack object
    */
   gridStack: computed(function() {
-    if(this.$()) {
+    if (this.$()) {
       return this.$().data('gridstack');
     }
   }).volatile(),
@@ -82,17 +82,17 @@ export default Component.extend({
   /**
    * @method willDestroyElement
    */
-   willDestroyElement() {
-     this._super(...arguments);
-     this._destroyGridStack();
-   },
+  willDestroyElement() {
+    this._super(...arguments);
+    this._destroyGridStack();
+  },
 
   /**
    * @method _destroyGridstack
    * @private
    */
   _destroyGridStack() {
-    let grid = get(this, 'gridStack');
+    const grid = get(this, 'gridStack');
 
     if (grid) {
 
@@ -105,9 +105,7 @@ export default Component.extend({
       this.$().data('gridstack', null);
 
       // Remove 'grid-stack-instance-####' class left behind
-      this.$().removeClass((index, css) => {
-          return (css.match(/grid-stack-instance-\d*/) || []).join(' ');
-      });
+      this.$().removeClass((index, css) => (css.match(/grid-stack-instance-\d*/) || []).join(' '));
     }
   },
 
@@ -116,7 +114,7 @@ export default Component.extend({
    * @private
    */
   _createGridStack() {
-    let options = assign({}, get(this, 'options'));
+    const options = assign({}, get(this, 'options'));
     this.$().gridstack(options);
 
     // Since destroying gridstack disables it,
@@ -126,9 +124,9 @@ export default Component.extend({
     }
 
     get(this, 'gridStackEvents').forEach(eventName => {
-      let action = get(this, `attrs.on${capitalize(eventName)}`);
+      const action = get(this, `attrs.on${capitalize(eventName)}`);
 
-      if(action) {
+      if (action) {
         this.$().on(`${eventName}.grid-stack`, function() {
           run.scheduleOnce('afterRender', this, action, ...arguments);
         });
@@ -141,7 +139,7 @@ export default Component.extend({
      * @action addWidget - add the provided widget element to the grid
      */
     addWidget(element) {
-      let grid = get(this, 'gridStack');
+      const grid = get(this, 'gridStack');
       if (grid) {
         grid.makeWidget(element);
       }
@@ -150,7 +148,7 @@ export default Component.extend({
      * @action removeWidget - remove the provided widget element from the grid
      */
     removeWidget(element) {
-      let grid = get(this, 'gridStack');
+      const grid = get(this, 'gridStack');
       if (grid) {
         // Use `false` option to prevent removing dom element, let Ember do that
         grid.removeWidget(element, false);
